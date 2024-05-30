@@ -131,10 +131,65 @@ header{
     flex-grow: 1;
 }
 
+.main-block-container{
+    position: relative;
+}
+
 .content__planning{
     width: 80%;
     display: block;
     margin: 20px auto;
     border: 1px solid rgb(208, 208, 208);
     border-radius: 20px;
+}
+
+/*Контекстное меню события*/
+
+#contextMenuButton {
+    position: absolute;
+    top: 30%;
+    left: 25%;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.context-menu {
+    position: absolute;
+    width: 300px;
+    background-color: #add8e6;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    z-index: 1000;
+}
+
+.context-menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.context-menu-header span {
+    font-size: 18px;
+    color: #008080;
+}
+
+.context-menu-body {
+    margin-top: 10px;
+}
+
+.context-menu-body p {
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+.context-menu-body img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.close-button {
+    cursor: pointer;
+    font-size: 24px;
+    color: #008080;
 }
