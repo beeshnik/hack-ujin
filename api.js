@@ -1,6 +1,6 @@
 module.exports = class API{
     constructor() {
-        this.link = "http://192.168.1.78:8080/"
+        this.link = "http://192.168.228.77:8080/"
     }
 
     async getBuilds(){
