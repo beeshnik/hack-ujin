@@ -31,15 +31,15 @@ header{
 }
 
 .content__floor-bar{
+    min-width: 140px;
     margin: 0;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    width: 140px;
     height: 100vh;
     overflow: auto;
-    padding-top: 15px;
+    padding: 15px 5px;
 
     box-shadow: 2px 0 4px 0 rgba(0, 0, 0, 0.25);
 }
@@ -65,16 +65,16 @@ header{
 }
 
 .content__buildings-menu{
-    width: 435px;
+    min-width: 22%;
     height: 100vh;
     box-shadow: -2px 0 4px 0 rgba(0, 0, 0, 0.25);
     overflow: auto;
 }
 
 .content__buildings-title{
-    padding: 9px 0;
+    padding: 9px 5px;
     color: rgb(100, 178, 178);
-    font-size: 50px;
+    font-size: 3.5vw;
     text-align: center;
     align-content: center;
 }
@@ -88,13 +88,13 @@ header{
     cursor: pointer;
 
     color: rgb(93, 137, 157);
-    font-size: 20px;
+    font-size: 1.2vw;
 }
 
 .content__buildings-item:hover{
     background: rgba(209, 209, 209, 0.42);
     color: rgb(37, 108, 140);
-    font-size: 22px;
+    font-size: 1.25vw;
 }
 
 #selected-building{
@@ -103,14 +103,14 @@ header{
     padding: 30px 0 30px 19px;
     border-bottom: 1px solid rgb(208, 208, 208);
     cursor: pointer;
-    background: rgba(209, 209, 209, 0.42);
+    background: rgba(119, 207, 209, 0.45);
 
     color: rgb(37, 108, 140);
-    font-size: 24px;
+    font-size: 1.3vw;
 }
 
 #selected-floor{
-    width: 100px;
+    width: 110px;
     height: 60px;
     border-radius: 30px;
     background: none;
@@ -132,6 +132,9 @@ header{
 }
 
 .content__planning{
+    width: 80%;
     display: block;
     margin: 20px auto;
+    border: 1px solid rgb(208, 208, 208);
+    border-radius: 20px;
 }
