@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
+function addAnimationsBuildings(){
     const buildingItems = document.querySelectorAll('.content__buildings-item');
 
     buildingItems.forEach(item => {
@@ -13,9 +13,8 @@ document.addEventListener('DOMContentLoaded', function () {
             item.id = 'selected-building';
         });
     });
-});
-
-document.addEventListener('DOMContentLoaded', function () {
+}
+function addAnimationsFloors(){
     const buildingItems = document.querySelectorAll('.content__floor-item');
 
     buildingItems.forEach(item => {
@@ -30,35 +29,50 @@ document.addEventListener('DOMContentLoaded', function () {
             item.id = 'selected-floor';
         });
     });
-});
+}
+
+async function subcribeBuilding(){
+
+}
+
+async function subcribeFloor(build){
+    const floorsDiv = document.getElementById('content__floor-bar')
+    const floors = await window.electronAPI.getFloors(build.id)
+    floorsDiv.innerHTML = ''
+
+    floors.forEach(floor => {
+        let floorDiv = document.createElement("div")
+        floorDiv.className = "content__floor-item"
+        console.log(floor)
+        if (floor.number === 0){
+            floorDiv.innerText = floor.name
+        }
+        else{
+            floorDiv.innerText = floor.number
+        }
+        floorsDiv.appendChild(floorDiv)
+        floorDiv.addEventListener("click", () => {
+            // window.electronAPI.getCameras(floor.id)
+        })
+    })
+    addAnimationsFloors()
+}
+
 
 document.addEventListener("DOMContentLoaded", async () => {
     const buildings = await window.electronAPI.getBuildings()
     const buildingsDiv = document.getElementById("content__buildings-menu")
-    const floorsDiv = document.getElementById('content__floor-bar')
+
     buildings.forEach(build => {
         let buildDiv = document.createElement("div")
         buildDiv.className = "content__buildings-item"
         buildDiv.innerText = build.name
 
         buildDiv.addEventListener("click", async () => {
-            const floors = await window.electronAPI.getFloors(build.id)
-            floorsDiv.innerHTML = ''
-
-            floors.forEach(floor => {
-                let floorDiv = document.createElement("div")
-                floorDiv.className = "content__floor-item"
-                console.log(floor)
-                if (floor.number === 0){
-                    floorDiv.innerText = floor.name
-                }
-                else{
-                    floorDiv.innerText = floor.number
-                }
-                floorsDiv.appendChild(floorDiv)
-            })
+            await subcribeFloor(build)
         })
 
         buildingsDiv.appendChild(buildDiv)
     })
+    addAnimationsBuildings()
 })
