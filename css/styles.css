@@ -31,6 +31,7 @@ header{
 }
 
 .content__floor-bar{
+    z-index: 1;
     min-width: 140px;
     margin: 0;
     display: flex;
@@ -74,7 +75,7 @@ header{
 .content__buildings-title{
     padding: 9px 5px;
     color: rgb(100, 178, 178);
-    font-size: 3.5vw;
+    font-size: 3.3vw;
     text-align: center;
     align-content: center;
 }
@@ -127,7 +128,6 @@ header{
 }
 
 .main-block{
-    z-index: -1;
     flex-grow: 1;
 }
 
@@ -135,6 +135,7 @@ header{
     width: 80%;
     position: relative;
     margin: 20px auto;
+    text-align: left;
 }
 
 .content__planning{
@@ -142,6 +143,7 @@ header{
     display: block;
     border: 1px solid rgb(208, 208, 208);
     border-radius: 20px;
+    margin-bottom: 15px;
 }
 
 /*Контекстное меню события*/
@@ -197,4 +199,31 @@ header{
 
 .content__camera{
     width: 4vw;
+}
+
+/*Изменение камер на карте*/
+
+.change-cameras{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.add-delete-camera{
+    z-index: 5;
+    color: white;
+    font-size: 30px;
+    border: none;
+    width: 8%;
+    height: 40px;
+    border-radius: 30px;
+    background: linear-gradient(180.00deg, rgb(131, 227, 239),rgb(117, 177, 198) 100%);
+    margin-right: 5px;
+
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.add-delete-camera:hover{
+    background: linear-gradient(180.00deg, rgb(102, 178, 188), rgb(70, 120, 136) 100%);
+
 }
