@@ -132,13 +132,14 @@ header{
 }
 
 .main-block-container{
+    width: 80%;
     position: relative;
+    margin: 20px auto;
 }
 
 .content__planning{
-    width: 80%;
+    width: 100%;
     display: block;
-    margin: 20px auto;
     border: 1px solid rgb(208, 208, 208);
     border-radius: 20px;
 }
@@ -192,4 +193,8 @@ header{
     cursor: pointer;
     font-size: 24px;
     color: #008080;
+}
+
+.content__camera{
+    width: 4vw;
 }
