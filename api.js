@@ -15,4 +15,10 @@ module.exports = class API{
             method: 'GET'
         })).json()
     }
+
+    async getCameras(id){
+        return (await fetch(`${this.link}camera?floorId=${id}`, {
+            method: 'GET'
+        })).json()
+    }
 }

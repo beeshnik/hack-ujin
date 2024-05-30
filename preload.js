@@ -15,6 +15,7 @@ contextBridge.exposeInMainWorld("electronAPI", {
   getBuildings: () => ipcRenderer.invoke("api:get-buildings"),
   // getFloors: (callback) => ipcRenderer.invoke("api:get-floors", (_event, id) => callback(id)),
   getFloors: (e, id) => ipcRenderer.invoke("api:get-floors", e, id),
+  getCameras: (e, id) => ipcRenderer.invoke("api:get-cameras", e, id),
 })
 
 

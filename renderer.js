@@ -51,8 +51,9 @@ async function subcribeFloor(build){
             floorDiv.innerText = floor.number
         }
         floorsDiv.appendChild(floorDiv)
-        floorDiv.addEventListener("click", () => {
-            // window.electronAPI.getCameras(floor.id)
+        floorDiv.addEventListener("click", async () => {
+            const cameras = await window.electronAPI.getCameras(floor.id)
+            console.log(cameras)
         })
     })
     addAnimationsFloors()
