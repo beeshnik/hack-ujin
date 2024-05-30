@@ -1,7 +1,33 @@
-/**
- * This file is loaded via the <script> tag in the index.html file and will
- * be executed in the renderer process for that window. No Node.js APIs are
- * available in this process because `nodeIntegration` is turned off and
- * `contextIsolation` is turned on. Use the contextBridge API in `preload.js`
- * to expose Node.js functionality from the main process.
- */
+document.addEventListener('DOMContentLoaded', function () {
+    const buildingItems = document.querySelectorAll('.content__buildings-item');
+
+    buildingItems.forEach(item => {
+        item.addEventListener('click', function () {
+            // Удаляем id 'selected-building' у предыдущего элемента
+            const previousSelected = document.getElementById('selected-building');
+            if (previousSelected) {
+                previousSelected.removeAttribute('id');
+            }
+
+            // Добавляем id 'selected-building' к текущему элементу
+            item.id = 'selected-building';
+        });
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const buildingItems = document.querySelectorAll('.content__floor-item');
+
+    buildingItems.forEach(item => {
+        item.addEventListener('click', function () {
+            // Удаляем id 'selected-building' у предыдущего элемента
+            const previousSelected = document.getElementById('selected-floor');
+            if (previousSelected) {
+                previousSelected.removeAttribute('id');
+            }
+
+            // Добавляем id 'selected-building' к текущему элементу
+            item.id = 'selected-floor';
+        });
+    });
+});

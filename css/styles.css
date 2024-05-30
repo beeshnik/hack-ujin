@@ -1,0 +1,132 @@
+body{
+    font-family: 'Prosto_One', sans-serif;
+    user-select: none;
+}
+
+@font-face {
+    font-family: 'Prosto_One';
+    src: url('../fonts/ProstoOne-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+header{
+    font-size: 50px;
+    background: linear-gradient(-55.78deg, rgb(114, 165, 188),rgb(132, 229, 241));
+    -webkit-background-clip:
+            text;
+    -webkit-text-fill-color:
+            transparent;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid rgb(193, 193, 193);
+}
+
+.content{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.content__floor-bar{
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 140px;
+    height: 100vh;
+    overflow: auto;
+    padding-top: 15px;
+
+    box-shadow: 2px 0 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.content__floor-item{
+    width: 110px;
+    height: 60px;
+    border-radius: 30px;
+    background: linear-gradient(180.00deg, rgb(131, 227, 239),rgb(117, 177, 198) 100%);
+    margin-bottom: 15px;
+
+    color: white;
+    font-size: 30px;
+    text-align: center;
+    align-content: center;
+    transition: all 0.1s ease-in-out;
+    cursor: pointer;
+}
+
+.content__floor-item:hover{
+    font-size: 32px;
+    filter: brightness(110%);
+}
+
+.content__buildings-menu{
+    width: 435px;
+    height: 100vh;
+    box-shadow: -2px 0 4px 0 rgba(0, 0, 0, 0.25);
+    overflow: auto;
+}
+
+.content__buildings-title{
+    padding: 9px 0;
+    color: rgb(100, 178, 178);
+    font-size: 50px;
+    text-align: center;
+    align-content: center;
+}
+
+.content__buildings-item{
+    text-align: left;
+    align-content: center;
+    padding: 30px 0 30px 19px;
+    border-bottom: 1px solid rgb(208, 208, 208);
+    transition: all 0.1s ease-in-out;
+    cursor: pointer;
+
+    color: rgb(93, 137, 157);
+    font-size: 20px;
+}
+
+.content__buildings-item:hover{
+    background: rgba(209, 209, 209, 0.42);
+    color: rgb(37, 108, 140);
+    font-size: 22px;
+}
+
+#selected-building{
+    text-align: left;
+    align-content: center;
+    padding: 30px 0 30px 19px;
+    border-bottom: 1px solid rgb(208, 208, 208);
+    cursor: pointer;
+    background: rgba(209, 209, 209, 0.42);
+
+    color: rgb(37, 108, 140);
+    font-size: 24px;
+}
+
+#selected-floor{
+    width: 100px;
+    height: 60px;
+    border-radius: 30px;
+    background: none;
+    border: 1px solid rgb(128, 217, 231);
+    margin-bottom: 15px;
+
+
+    color: rgb(136, 219, 232);
+    font-size: 30px;
+    text-align: center;
+    align-content: center;
+    transition: all 0.1s ease-in-out;
+    cursor: pointer;
+}
+
+.main-block{
+    z-index: -1;
+    flex-grow: 1;
+}
