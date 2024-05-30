@@ -13,7 +13,8 @@ const {ipcRenderer, contextBridge} = require("electron")
 
 contextBridge.exposeInMainWorld("electronAPI", {
   getBuildings: () => ipcRenderer.invoke("api:get-buildings"),
-  getFloors: (id) => ipcRenderer.invoke("api:get-floors", id),
+  // getFloors: (callback) => ipcRenderer.invoke("api:get-floors", (_event, id) => callback(id)),
+  getFloors: (e, id) => ipcRenderer.invoke("api:get-floors", e, id),
 })
 
 

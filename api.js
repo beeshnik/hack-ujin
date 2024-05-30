@@ -1,12 +1,13 @@
 module.exports = class API{
     constructor() {
-        this.link = ""
+        this.link = "http://192.168.1.78:8080/"
     }
 
     async getBuilds(){
-        return (await fetch(`${this.link}building`, {
+        const result =  (await fetch(`${this.link}building`, {
             method: 'GET'
         })).json()
+        return result
     }
 
     async getFloors(id){

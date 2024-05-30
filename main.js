@@ -21,16 +21,24 @@ function createWindow () {
   mainWindow.loadFile(path.join(__dirname, '/html/zone_choice.html'))
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 }
 
 async function sendBuilds(){
-  return await api.getBuildings()
+  const result = await api.getBuilds()
+  return result
+}
+
+async function sendFloors(e, id){
+  const result = await api.getFloors(id)
+  return result
 }
 
 app.whenReady().then(() => {
   createWindow()
+
   ipcMain.handle("api:get-buildings", sendBuilds)
+  ipcMain.handle("api:get-floors", sendFloors)
 
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
