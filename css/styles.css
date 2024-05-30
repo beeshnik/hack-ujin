@@ -130,3 +130,8 @@ header{
     z-index: -1;
     flex-grow: 1;
 }
+
+.content__planning{
+    display: block;
+    margin: 20px auto;
+}
