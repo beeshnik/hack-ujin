@@ -31,10 +31,6 @@ function addAnimationsFloors(){
     });
 }
 
-async function subcribeBuilding(){
-
-}
-
 async function subcribeFloor(build){
     const floorsDiv = document.getElementById('content__floor-bar')
     const floors = await window.electronAPI.getFloors(build.id)
