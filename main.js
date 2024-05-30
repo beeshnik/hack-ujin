@@ -1,10 +1,15 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('node:path')
+const API = require(__dirname + "/api.js")
+
+const api = new API()
+
+let mainWindow;
 
 function createWindow () {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
@@ -16,14 +21,24 @@ function createWindow () {
   mainWindow.loadFile(path.join(__dirname, '/html/zone_choice.html'))
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 }
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
+async function sendBuilds(){
+  const result = await api.getBuilds()
+  return result
+}
+
+async function sendFloors(e, id){
+  const result = await api.getFloors(id)
+  return result
+}
+
 app.whenReady().then(() => {
   createWindow()
+
+  ipcMain.handle("api:get-buildings", sendBuilds)
+  ipcMain.handle("api:get-floors", sendFloors)
 
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
