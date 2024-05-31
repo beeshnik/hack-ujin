@@ -4,6 +4,12 @@ let menu
 let x;
 let y;
 
+const pngs = {
+    "fire" : '../icons/fire.png',
+    "lost_item" : '../icons/lost_item.png',
+    "emergency_car" : '../icons/emergency_car.png'
+}
+
 function addAnimationsBuildings() {
     const buildingItems = document.querySelectorAll('.content__buildings-item');
 
@@ -23,6 +29,7 @@ function addAnimationsBuildings() {
 
 function addAnimationsFloors() {
     const buildingItems = document.querySelectorAll('.content__floor-item');
+    const container = document.getElementById("main-block-container")
 
     buildingItems.forEach(item => {
         item.addEventListener('click', function () {
@@ -56,7 +63,6 @@ async function subcribeFloor(build) {
     floors.forEach(floor => {
         let floorDiv = document.createElement("div")
         floorDiv.className = "content__floor-item"
-        // console.log(floor)
         if (floor.number === 0) {
             floorDiv.innerText = floor.name
         } else {
@@ -67,6 +73,22 @@ async function subcribeFloor(build) {
             const floorWithCamera = await window.electronAPI.getCameras(floor.id)
             image.src = floorWithCamera.planBase64
             insertCameraImages(floorWithCamera.cameras)
+
+            const events = await window.electronAPI.checkEvent(floor.id)
+            console.log(events)
+            events.forEach(event => {
+                const field = document.getElementById("main-block-container")
+                const rect = image.getBoundingClientRect();
+                const evElem = document.createElement("img")
+                evElem.setAttribute("src", pngs.event)
+                evElem.style.position = "absolute"
+                evElem.style.top = `${y}px`;
+                evElem.style.left = `${x}px`;
+                evElem.style.zIndex = "20";
+                field.appendChild(evElem)
+            })
+
+
             addCam.addEventListener("click", async (e) => {
                 menu = document.getElementById("add-camera-menu")
 
@@ -84,6 +106,7 @@ async function subcribeFloor(build) {
                 const cameraList = document.getElementById("select-cameras")
                 const cameras = await window.electronAPI.getAllCameras()
                 console.log(cameras)
+                cameraList.innerHTML = ""
                 cameras.forEach(camera => {
                     let opt = document.createElement("option")
                     opt.value = camera.id
@@ -91,14 +114,12 @@ async function subcribeFloor(build) {
                     cameraList.appendChild(opt)
                 })
 
-                apply.addEventListener("click", () => {
+                apply.addEventListener("click", async () => {
                     menu.style.display = "none"
                     image.removeEventListener("click", showMenu)
 
                     const field = document.getElementById("main-block-container")
                     const rect = image.getBoundingClientRect();
-                    // x = e.clientX - rect.left;
-                    // y = e.clientY - rect.top;
                     const cam = document.createElement("img")
                     cam.setAttribute("src",'../icons/camera.svg')
                     cam.style.position = "absolute"
@@ -107,9 +128,23 @@ async function subcribeFloor(build) {
                     cam.style.zIndex = "20";
                     field.appendChild(cam)
 
+                    const data = {
+                        "floorId": floor.id,
+                        "externalId": cameraList.value,
+                        "x": x,
+                        "y": y
+                    }
+
+                    let response = await window.electronAPI.postCamera(data)
+
 
                 })
+
+
+
+
             })
+
         })
     })
     addAnimationsFloors()
@@ -144,8 +179,10 @@ function insertCameraImages(cameras) {
         newCamera.alt = 'camera' ;
         newCamera.classList.add('content__camera'); // Добавляем класс, если нужно
         newCamera.style.position = 'absolute';
-        newCamera.style.bottom = camera.y + 'vh';
-        newCamera.style.left = camera.x + 'vh';
+        newCamera.style.bottom = camera.y + 'px';
+        newCamera.style.left = camera.x + 'px';
         container.appendChild(newCamera);
+
+
     });
 }

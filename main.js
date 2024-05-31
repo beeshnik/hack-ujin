@@ -51,8 +51,14 @@ async function sendAllCameras(){
   return result
 }
 
-function sendCoords(){
-  mainWindow.webContents.send("window:get-coords", "wdsaw")
+async function postCamera(e, data){
+  const result = await api.postCamera(data)
+  return result
+}
+
+async function checkEvents(e, id){
+  const result = await api.getEvent(id)
+  return result
 }
 
 app.whenReady().then(() => {
@@ -63,6 +69,8 @@ app.whenReady().then(() => {
   ipcMain.handle("api:get-cameras", sendCameras)
   ipcMain.handle("api:get-camera-info", sendCameraInfo)
   ipcMain.handle("api:get-all-cameras", sendAllCameras)
+  ipcMain.handle("api:post-camera", postCamera)
+  ipcMain.handle("api:check-events", checkEvents)
 
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the

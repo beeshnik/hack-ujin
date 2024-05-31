@@ -27,4 +27,28 @@ module.exports = class API{
             method: 'GET'
         })).json()
     }
+
+    async postCamera(data){
+        let jsn = {
+            "floorId": data.floorId,
+            "externalId": data.externalId,
+            "x": data.x,
+            "y": data.y
+        }
+        return (await (fetch(`${this.link}camera`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(jsn)
+        }))).json()
+    }
+
+    async getEvent(id){
+        return (await fetch(`${this.link}event?floorId=${id}`, {
+            method: 'GET'
+        })).json()
+    }
+
 }
