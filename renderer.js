@@ -55,7 +55,7 @@ async function subcribeFloor(build) {
             image.src = floorWithCamera.planBase64
             insertCameraImages(floorWithCamera.cameras)
             addCam.addEventListener("click", (e) => {
-                const menu = document.getElementById("add-camera-menu")
+                const menu = document.getElementById("add-camera-menu" )
                 menu.style.display = "block"
             })
         })
