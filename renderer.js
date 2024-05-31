@@ -17,7 +17,6 @@ function addAnimationsBuildings() {
 
 function addAnimationsFloors() {
     const buildingItems = document.querySelectorAll('.content__floor-item');
-    const container = document.querySelector('.main-block-container');
 
     buildingItems.forEach(item => {
         item.addEventListener('click', function () {
@@ -29,10 +28,6 @@ function addAnimationsFloors() {
 
             // Добавляем id 'selected-building' к текущему элементу
             item.id = 'selected-floor';
-            container.innerHTML = "<img class=\"content__planning\" src=\"../img/Planning%20no%20cameras.png\" alt=\"\"><div class=\"change-cameras\">\n" +
-                "                <button class=\"delete-camera add-delete-camera\">-</button>\n" +
-                "                <button class=\"add-camera add-delete-camera\">+</button>\n" +
-                "            </div>"
         });
     });
 }
@@ -40,12 +35,13 @@ function addAnimationsFloors() {
 async function subcribeFloor(build) {
     const floorsDiv = document.getElementById('content__floor-bar')
     const floors = await window.electronAPI.getFloors(build.id)
+    const image = document.getElementById("floor-plan")
     floorsDiv.innerHTML = ''
 
     floors.forEach(floor => {
         let floorDiv = document.createElement("div")
         floorDiv.className = "content__floor-item"
-        console.log(floor)
+        // console.log(floor)
         if (floor.number === 0) {
             floorDiv.innerText = floor.name
         } else {
@@ -53,9 +49,9 @@ async function subcribeFloor(build) {
         }
         floorsDiv.appendChild(floorDiv)
         floorDiv.addEventListener("click", async () => {
-            const cameras = await window.electronAPI.getCameras(floor.id)
-            console.log(cameras)
-            insertCameraImages(cameras)
+            const floorWithCamera = await window.electronAPI.getCameras(floor.id)
+            image.src = floorWithCamera.planBase64
+            insertCameraImages(floorWithCamera.cameras)
         })
     })
     addAnimationsFloors()
@@ -82,6 +78,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 function insertCameraImages(cameras) {
     const container = document.querySelector('.main-block-container');
+    // container.innerHTML = "<img class=\"content__planning\" src=\"../img/Planning%20no%20cameras.png\" alt=\"\">";
     const src_icon = '../icons/camera-icon.svg';
 
     cameras.forEach(camera => {
