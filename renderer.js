@@ -1,3 +1,5 @@
+const addCam = document.getElementById("edit-cameras")
+
 function addAnimationsBuildings() {
     const buildingItems = document.querySelectorAll('.content__buildings-item');
 
@@ -52,13 +54,14 @@ async function subcribeFloor(build) {
             const floorWithCamera = await window.electronAPI.getCameras(floor.id)
             image.src = floorWithCamera.planBase64
             insertCameraImages(floorWithCamera.cameras)
-            const editCameras = document.getElementById("edit-cameras")
-            checkTapCoors(image)
+            addCam.addEventListener("click", (e) => {
+                const menu = document.getElementById("add-camera-menu")
+                menu.style.display = "block"
+            })
         })
     })
     addAnimationsFloors()
 }
-
 
 document.addEventListener("DOMContentLoaded", async () => {
     const buildings = await window.electronAPI.getBuildings()
@@ -94,32 +97,3 @@ function insertCameraImages(cameras) {
         container.appendChild(newCamera);
     });
 }
-
-function checkTapCoors(image) {
-    image.addEventListener("click", (e) => {
-        console.log(e)
-    })
-}
-
-document.addEventListener('DOMContentLoaded', function () {
-    const container = document.getElementById('main-block-container');
-    const contextMenu = document.getElementById('add-camera-menu');
-
-    container.addEventListener('click', function (event) {
-        event.preventDefault();
-
-        const x = event.clientX;
-        const y = event.clientY;
-
-        contextMenu.style.left = `${x}px`;
-        contextMenu.style.top = `${y}px`;
-        contextMenu.style.display = 'block';
-    });
-
-    document.addEventListener('click', function (event) {
-        if (!contextMenu.contains(event.target) && event.target !== container) {
-            contextMenu.style.display = 'none';
-        }
-    });
-});
-

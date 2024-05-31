@@ -1,7 +1,9 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, ipcMain } = require('electron')
+const { app, BrowserWindow, ipcMain, MouseInputEvent} = require('electron')
 const path = require('node:path')
 const API = require(__dirname + "/api.js")
+const electron = require("electron");
+const events = require("events");
 
 const api = new API()
 
@@ -44,6 +46,10 @@ async function sendCameraInfo(e, id){
   return result
 }
 
+function sendCoords(){
+  mainWindow.webContents.send("window:get-coords", "wdsaw")
+}
+
 app.whenReady().then(() => {
   createWindow()
 
@@ -51,6 +57,7 @@ app.whenReady().then(() => {
   ipcMain.handle("api:get-floors", sendFloors)
   ipcMain.handle("api:get-cameras", sendCameras)
   ipcMain.handle("api:get-camera-info", sendCameraInfo)
+  ipcMain.on("window:send-coords", sendCoords)
 
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
