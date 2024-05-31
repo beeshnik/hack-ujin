@@ -1,4 +1,8 @@
 const addCam = document.getElementById("edit-cameras")
+let image
+let menu
+let x;
+let y;
 
 function addAnimationsBuildings() {
     const buildingItems = document.querySelectorAll('.content__buildings-item');
@@ -34,10 +38,19 @@ function addAnimationsFloors() {
     });
 }
 
+function showMenu(e){
+    const rect = image.getBoundingClientRect();
+    x = e.clientX - rect.left;
+    y = e.clientY - rect.top;
+    menu.style.top = `${y}px`;
+    menu.style.left = `${x}px`;
+    menu.style.display = "block"
+}
+
 async function subcribeFloor(build) {
     const floorsDiv = document.getElementById('content__floor-bar')
     const floors = await window.electronAPI.getFloors(build.id)
-    const image = document.getElementById("floor-plan")
+    image = document.getElementById("floor-plan")
     floorsDiv.innerHTML = ''
 
     floors.forEach(floor => {
@@ -54,9 +67,48 @@ async function subcribeFloor(build) {
             const floorWithCamera = await window.electronAPI.getCameras(floor.id)
             image.src = floorWithCamera.planBase64
             insertCameraImages(floorWithCamera.cameras)
-            addCam.addEventListener("click", (e) => {
-                const menu = document.getElementById("add-camera-menu" )
-                menu.style.display = "block"
+            addCam.addEventListener("click", async (e) => {
+                menu = document.getElementById("add-camera-menu")
+
+                image.addEventListener("click", showMenu)
+
+                const closeWindow = document.getElementById("deny")
+                const apply = document.getElementById("accept")
+
+                closeWindow.addEventListener("click", ()=>{
+                    menu.style.display = "none"
+
+                    image.removeEventListener("click", showMenu)
+                })
+
+                const cameraList = document.getElementById("select-cameras")
+                const cameras = await window.electronAPI.getAllCameras()
+                console.log(cameras)
+                cameras.forEach(camera => {
+                    let opt = document.createElement("option")
+                    opt.value = camera.id
+                    opt.textContent = camera.name
+                    cameraList.appendChild(opt)
+                })
+
+                apply.addEventListener("click", () => {
+                    menu.style.display = "none"
+                    image.removeEventListener("click", showMenu)
+
+                    const field = document.getElementById("main-block-container")
+                    const rect = image.getBoundingClientRect();
+                    // x = e.clientX - rect.left;
+                    // y = e.clientY - rect.top;
+                    const cam = document.createElement("img")
+                    cam.setAttribute("src",'../icons/camera.svg')
+                    cam.style.position = "absolute"
+                    cam.style.top = `${y}px`;
+                    cam.style.left = `${x}px`;
+                    cam.style.zIndex = "20";
+                    field.appendChild(cam)
+
+
+                })
             })
         })
     })

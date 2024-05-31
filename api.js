@@ -21,4 +21,10 @@ module.exports = class API{
             method: 'GET'
         })).json()
     }
+
+    async getCamerasOnFloor(){
+        return (await fetch(`${this.link}camera/available`, {
+            method: 'GET'
+        })).json()
+    }
 }

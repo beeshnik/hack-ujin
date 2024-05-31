@@ -46,6 +46,11 @@ async function sendCameraInfo(e, id){
   return result
 }
 
+async function sendAllCameras(){
+  const result = await api.getCamerasOnFloor()
+  return result
+}
+
 function sendCoords(){
   mainWindow.webContents.send("window:get-coords", "wdsaw")
 }
@@ -57,7 +62,7 @@ app.whenReady().then(() => {
   ipcMain.handle("api:get-floors", sendFloors)
   ipcMain.handle("api:get-cameras", sendCameras)
   ipcMain.handle("api:get-camera-info", sendCameraInfo)
-  ipcMain.on("window:send-coords", sendCoords)
+  ipcMain.handle("api:get-all-cameras", sendAllCameras)
 
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
