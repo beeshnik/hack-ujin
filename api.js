@@ -17,7 +17,7 @@ module.exports = class API{
     }
 
     async getCameras(id){
-        return (await fetch(`${this.link}camera?floorId=${id}`, {
+        return (await fetch(`${this.link}floor/${id}`, {
             method: 'GET'
         })).json()
     }

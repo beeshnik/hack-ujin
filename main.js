@@ -39,12 +39,18 @@ async function sendCameras(e, id){
   return result
 }
 
+async function sendCameraInfo(e, id){
+  const result = await api.getCameraInfo(id)
+  return result
+}
+
 app.whenReady().then(() => {
   createWindow()
 
   ipcMain.handle("api:get-buildings", sendBuilds)
   ipcMain.handle("api:get-floors", sendFloors)
   ipcMain.handle("api:get-cameras", sendCameras)
+  ipcMain.handle("api:get-camera-info", sendCameraInfo)
 
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
