@@ -97,11 +97,12 @@ function insertCameraImages(cameras) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    const contextMenuButton = document.getElementById('add-camera');
+    const container = document.getElementById('main-block-container');
     const contextMenu = document.getElementById('add-camera-menu');
 
-    contextMenuButton.addEventListener('click', function(event) {
+    container.addEventListener('click', function(event) {
         event.preventDefault();
+
         const x = event.clientX;
         const y = event.clientY;
 
@@ -111,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     document.addEventListener('click', function(event) {
-        if (!contextMenu.contains(event.target) && event.target !== contextMenuButton) {
+        if (!contextMenu.contains(event.target) && event.target !== container) {
             contextMenu.style.display = 'none';
         }
     });
