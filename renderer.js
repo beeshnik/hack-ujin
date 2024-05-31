@@ -89,7 +89,7 @@ function insertCameraImages(cameras) {
     cameras.forEach(camera => {
         const newCamera = document.createElement('img');
         newCamera.src = src_icon;
-        newCamera.alt = 'camera';
+        newCamera.alt = 'camera' ;
         newCamera.classList.add('content__camera'); // Добавляем класс, если нужно
         newCamera.style.position = 'absolute';
         newCamera.style.bottom = camera.y + 'vh';
