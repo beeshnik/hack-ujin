@@ -31,7 +31,7 @@ function addAnimationsFloors() {
             item.id = 'selected-floor';
             container.innerHTML = "<img class=\"content__planning\" src=\"../img/Planning%20no%20cameras.png\" alt=\"\"><div class=\"change-cameras\">\n" +
                 "                <button class=\"delete-camera add-delete-camera\">-</button>\n" +
-                "                <button class=\"add-camera add-delete-camera\">+</button>\n" +
+                "                <button id=\"add-camera\" class=\"add-camera add-delete-camera\">+</button>\n" +
                 "            </div>"
         });
     });
@@ -95,4 +95,25 @@ function insertCameraImages(cameras) {
         container.appendChild(newCamera);
     });
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const contextMenuButton = document.getElementById('add-camera');
+    const contextMenu = document.getElementById('add-camera-menu');
+
+    contextMenuButton.addEventListener('click', function(event) {
+        event.preventDefault();
+        const x = event.clientX;
+        const y = event.clientY;
+
+        contextMenu.style.left = `${x}px`;
+        contextMenu.style.top = `${y}px`;
+        contextMenu.style.display = 'block';
+    });
+
+    document.addEventListener('click', function(event) {
+        if (!contextMenu.contains(event.target) && event.target !== contextMenuButton) {
+            contextMenu.style.display = 'none';
+        }
+    });
+});
 

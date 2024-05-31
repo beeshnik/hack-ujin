@@ -227,3 +227,67 @@ header{
     background: linear-gradient(180.00deg, rgb(102, 178, 188), rgb(70, 120, 136) 100%);
 
 }
+
+/*Меню добавления камеры*/
+
+.add-camera-menu{
+    display: none;
+
+    z-index: 5;
+    padding: 12px 30px;
+    text-align: center;
+    position: absolute;
+    width: 360px;
+    height: 210px;
+    border-radius: 30px;
+    background: linear-gradient(133.83deg, rgb(116, 165, 180) 0.512%,rgb(130, 224, 236) 99.488%);
+}
+
+.add-camera-menu__title{
+    color: rgb(255, 255, 255);
+    font-size: 24px;
+    margin-bottom: 14px;
+}
+
+.add-camera-menu__input{
+    text-align: left;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.add-camera-menu__input p{
+    color: rgb(255, 255, 255);
+    margin-bottom: 5px;
+    padding-left: 20px;
+}
+
+.add-camera-menu__input select{
+    cursor: pointer;
+    outline: none;
+    height: 50px;
+    width: 100%;
+    border: none;
+    border-radius: 20px;
+    margin-bottom: 40px;
+    padding: 15px 15px;
+}
+
+.add-camera-menu__btns{
+    display: flex;
+    justify-content: space-between;
+}
+
+.add-camera-menu__btns button{
+    color: #4CA4B6;
+    width: 47%;
+    height: 45px;
+    border: none;
+    border-radius: 17px;
+
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.add-camera-menu__btns button:hover{
+    background: #cdcdcd;
+}
