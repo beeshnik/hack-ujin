@@ -40,12 +40,13 @@ function addAnimationsFloors() {
 async function subcribeFloor(build) {
     const floorsDiv = document.getElementById('content__floor-bar')
     const floors = await window.electronAPI.getFloors(build.id)
+    const image = document.getElementById("floor-plan")
     floorsDiv.innerHTML = ''
 
     floors.forEach(floor => {
         let floorDiv = document.createElement("div")
         floorDiv.className = "content__floor-item"
-        console.log(floor)
+        // console.log(floor)
         if (floor.number === 0) {
             floorDiv.innerText = floor.name
         } else {
@@ -53,13 +54,16 @@ async function subcribeFloor(build) {
         }
         floorsDiv.appendChild(floorDiv)
         floorDiv.addEventListener("click", async () => {
-            const cameras = await window.electronAPI.getCameras(floor.id)
-            console.log(cameras)
-            insertCameraImages(cameras)
+            const floorWithCamera = await window.electronAPI.getCameras(floor.id)
+            image.src = floorWithCamera.planBase64
+            insertCameraImages(floorWithCamera.cameras)
+            const editCameras = document.getElementById("edit-cameras")
+            checkTapCoors(image)
         })
     })
     addAnimationsFloors()
 }
+
 
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -95,6 +99,13 @@ function insertCameraImages(cameras) {
         container.appendChild(newCamera);
     });
 }
+
+function checkTapCoors(image){
+    image.addEventListener("click", (e) => {
+        console.log(e)
+    })
+}
+
 
 document.addEventListener('DOMContentLoaded', function() {
     const container = document.getElementById('main-block-container');
