@@ -17,7 +17,6 @@ function addAnimationsBuildings() {
 
 function addAnimationsFloors() {
     const buildingItems = document.querySelectorAll('.content__floor-item');
-    const container = document.querySelector('.main-block-container');
 
     buildingItems.forEach(item => {
         item.addEventListener('click', function () {
@@ -29,10 +28,6 @@ function addAnimationsFloors() {
 
             // Добавляем id 'selected-building' к текущему элементу
             item.id = 'selected-floor';
-            container.innerHTML = "<img class=\"content__planning\" src=\"../img/Planning%20no%20cameras.png\" alt=\"\"><div class=\"change-cameras\">\n" +
-                "                <button class=\"delete-camera add-delete-camera\">-</button>\n" +
-                "                <button id=\"add-camera\" class=\"add-camera add-delete-camera\">+</button>\n" +
-                "            </div>"
         });
     });
 }
@@ -65,7 +60,6 @@ async function subcribeFloor(build) {
 }
 
 
-
 document.addEventListener("DOMContentLoaded", async () => {
     const buildings = await window.electronAPI.getBuildings()
     const buildingsDiv = document.getElementById("content__buildings-menu")
@@ -86,6 +80,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 function insertCameraImages(cameras) {
     const container = document.querySelector('.main-block-container');
+    // container.innerHTML = "<img class=\"content__planning\" src=\"../img/Planning%20no%20cameras.png\" alt=\"\">";
     const src_icon = '../icons/camera-icon.svg';
 
     cameras.forEach(camera => {
@@ -100,18 +95,17 @@ function insertCameraImages(cameras) {
     });
 }
 
-function checkTapCoors(image){
+function checkTapCoors(image) {
     image.addEventListener("click", (e) => {
         console.log(e)
     })
 }
 
-
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const container = document.getElementById('main-block-container');
     const contextMenu = document.getElementById('add-camera-menu');
 
-    container.addEventListener('click', function(event) {
+    container.addEventListener('click', function (event) {
         event.preventDefault();
 
         const x = event.clientX;
@@ -122,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
         contextMenu.style.display = 'block';
     });
 
-    document.addEventListener('click', function(event) {
+    document.addEventListener('click', function (event) {
         if (!contextMenu.contains(event.target) && event.target !== container) {
             contextMenu.style.display = 'none';
         }
