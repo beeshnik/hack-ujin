@@ -5,9 +5,9 @@ let x;
 let y;
 
 const pngs = {
-    "fire" : '../icons/fire.png',
-    "lost_item" : '../icons/lost_item.png',
-    "emergency_car" : '../icons/emergency_car.png'
+    "FIRE" : '../icons/fire.png',
+    "LOST_ITEM" : '../icons/lost_item.png',
+    "EMERGENCY_CAR" : '../icons/emergency_car.png'
 }
 
 function addAnimationsBuildings() {
@@ -80,7 +80,7 @@ async function subcribeFloor(build) {
                 const field = document.getElementById("main-block-container")
                 const rect = image.getBoundingClientRect();
                 const evElem = document.createElement("img")
-                evElem.setAttribute("src", pngs.event)
+                evElem.setAttribute("src", pngs[event.type])
                 evElem.style.position = "absolute"
                 evElem.style.top = `${y}px`;
                 evElem.style.left = `${x}px`;
@@ -140,9 +140,6 @@ async function subcribeFloor(build) {
 
                 })
 
-
-
-
             })
 
         })
@@ -182,7 +179,6 @@ function insertCameraImages(cameras) {
         newCamera.style.bottom = camera.y + 'px';
         newCamera.style.left = camera.x + 'px';
         container.appendChild(newCamera);
-
 
     });
 }
