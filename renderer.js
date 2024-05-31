@@ -17,6 +17,7 @@ function addAnimationsBuildings() {
 
 function addAnimationsFloors() {
     const buildingItems = document.querySelectorAll('.content__floor-item');
+    const container = document.querySelector('.main-block-container');
 
     buildingItems.forEach(item => {
         item.addEventListener('click', function () {
@@ -28,6 +29,10 @@ function addAnimationsFloors() {
 
             // Добавляем id 'selected-building' к текущему элементу
             item.id = 'selected-floor';
+            container.innerHTML = "<img class=\"content__planning\" src=\"../img/Planning%20no%20cameras.png\" alt=\"\"><div class=\"change-cameras\">\n" +
+                "                <button class=\"delete-camera add-delete-camera\">-</button>\n" +
+                "                <button class=\"add-camera add-delete-camera\">+</button>\n" +
+                "            </div>"
         });
     });
 }
@@ -77,7 +82,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 function insertCameraImages(cameras) {
     const container = document.querySelector('.main-block-container');
-    container.innerHTML = "<img class=\"content__planning\" src=\"../img/Planning%20no%20cameras.png\" alt=\"\">";
     const src_icon = '../icons/camera-icon.svg';
 
     cameras.forEach(camera => {
